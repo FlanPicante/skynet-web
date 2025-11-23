@@ -55,7 +55,14 @@ class UsersWebController extends Controller
 
     public function store(Request $request)
     {
-        $data = $request;
+
+        $data = $request->validate([
+            'name' => ['required', 'string'],
+            'email' => ['required', 'string'],
+            'password' => ['required', 'string'],
+            'role_id' => ['required', 'integer'],
+            'phone' => ['nullable', 'string'],
+        ]);
 
         $data['active'] = $request->has('active') ? 1 : 0;
 
@@ -69,8 +76,9 @@ class UsersWebController extends Controller
             $resp = $e->getResponse();
             $body = json_decode($resp->getBody()->getContents(), true);
 
-            $msg = $body['message'] ?? 'Error al crear el usuario.';
-            
+            $msg = $body['message'].' '.$e->getMessage() ?? 'Error al crear el usuario.';
+
+           
             return back()
                 ->withInput()
                 ->withErrors(['general' => $msg]);

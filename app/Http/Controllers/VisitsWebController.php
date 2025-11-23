@@ -212,8 +212,8 @@ class VisitsWebController extends Controller
             
             $res = $api->post("visits/{$id}/events", [
                 'form_params' => [
-                    'event_type' => 'status_change',
-                    'status' => 'onroute',
+                    'event_type' => 'en_ruta',
+                    'status' => '2',
                 ]
             ]);
 

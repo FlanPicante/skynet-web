@@ -13,12 +13,9 @@
     <div class="mb-3">
         <label class="form-label">Nombre</label>
         <input name="name"
-               class="form-control @error('name') is-invalid @enderror"
+               class="form-control"
                value="{{ old('name') }}"
                required>
-        @error('name')
-            <div class="invalid-feedback">{{ $message }}</div>
-        @enderror
     </div>
 
     <div class="mb-3">
